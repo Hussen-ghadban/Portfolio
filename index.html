@@ -9,20 +9,41 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-        <div class="container">
-            <div class="header-content">
-                <h1>Hussein Ghadban</h1>
-                <p class="subtitle">Full Stack Developer</p>
-                <div class="cta-buttons">
-                    <a href="#about" class="btn">About Me</a>
-                    <a href="#projects" class="btn">View Projects</a>
-                    <a href="#contact" class="btn">Get In Touch</a>
-                </div>
-            </div>
+<header>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+  <div class="container">
+    <div class="header-content">
+      <div class="text-section">
+        <h1>Hussein Ghadban</h1>
+        <p class="subtitle">Full Stack Developer</p>
+        <div class="cta-buttons">
+          <a href="#about" class="btn">About Me</a>
+          <a href="#projects" class="btn">View Projects</a>
+          <a href="#contact" class="btn">Get In Touch</a>
         </div>
-    </header>
+      </div>
+      <div class="animation-section">
+        <div id="lottie-animation" style="width: 300px; height: 300px;"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
+<script>
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-animation'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'animation.json' // Replace with the path to your JSON file
+  });
+
+  function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+  }
+</script>
 
     <!-- About Me -->
     <section id="about">
