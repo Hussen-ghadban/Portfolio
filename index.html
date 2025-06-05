@@ -37,11 +37,12 @@
     renderer: 'svg',
     loop: true,
     autoplay: true,
-    path: 'animation.json' // Replace with the path to your JSON file
+    path: 'animation.json'
   });
 
   function toggleTheme() {
     document.body.classList.toggle('dark-mode');
+
   }
 </script>
 
@@ -285,12 +286,6 @@
                 }
             });
         }
-        //   function copyToClipboard(text) {
-        //     navigator.clipboard.writeText(text).then(() => {
-        //     }).catch(err => {
-        //     console.error("Failed to copy: ", err);
-        //     });
-        // }
 
         function copyToClipboard(text) {
   navigator.clipboard.writeText(text).then(() => {
