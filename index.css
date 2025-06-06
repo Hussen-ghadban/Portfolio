@@ -62,16 +62,10 @@
     justify-content: center;
     align-items: center;
 }
-        /* Header - Enhanced Responsive */
         header {
             color: var(--text-color);
             background-color: var(--bg-color);
-            /* text-align: center; */
-            /* padding: clamp(2rem, 8vh, 6rem) 0; */
-            /* position: relative; */
-            /* overflow: hidden; */
             min-height: 60vh;
-            /* display: flex; */
             align-items: center;
         }
 
@@ -166,7 +160,6 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-        /* Sections - Enhanced Spacing */
         section {
             padding: clamp(2rem, 8vh, 5rem) 0;
         }
@@ -193,7 +186,6 @@
             border-radius: 2px;
         }
 
-        /* About - Better Typography */
         .about-content {
             max-width: 800px;
             margin: 0 auto;
@@ -207,7 +199,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Skills - Improved Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
@@ -251,7 +242,6 @@
             white-space: nowrap;
         }
 
-        /* Projects - Enhanced Cards */
         .projects-grid {
             display: grid;
             gap: clamp(1.5rem, 4vw, 2.5rem);
@@ -315,7 +305,6 @@
             white-space: nowrap;
         }
 
-        /* Contact - Better Layout */
         .contact-content {
             text-align: center;
             max-width: 600px;
@@ -396,7 +385,6 @@
   transform: translateX(-50%) translateY(-10px);
 }
 
-        /* Footer */
         footer {
             background: var(--gradient);
             color: white;
@@ -408,7 +396,6 @@
             font-size: clamp(0.8rem, 2vw, 1rem);
         }
 
-        /* Enhanced Mobile Optimizations */
         @media (max-width: 768px) {
                 .header-content {
         flex-direction: column;
@@ -470,7 +457,6 @@
             }
         }
 
-        /* Ultra-small screens */
         @media (max-width: 320px) {
 
             .container {
@@ -504,7 +490,6 @@
     }
         }
 
-        /* Large screens optimization */
         @media (min-width: 1400px) {
             .skills-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -515,12 +500,10 @@
             }
         }
 
-        /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Loading animation */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -532,7 +515,6 @@
             transform: translateY(0);
         }
 
-        /* Focus states for accessibility */
         .btn:focus,
         .contact-link:focus,
         .theme-toggle:focus {
@@ -540,7 +522,6 @@
             outline-offset: 2px;
         }
 
-        /* High contrast mode support */
         @media (prefers-contrast: high) {
             :root {
                 --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
@@ -548,7 +529,6 @@
             }
         }
 
-        /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -568,7 +548,6 @@
     }
 }
 
-/* Large Desktop Styles */
 @media (min-width: 1440px) {
     .container {
         max-width: 1400px;
