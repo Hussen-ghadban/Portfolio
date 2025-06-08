@@ -4,47 +4,458 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hussein Ghadban - Full Stack Developer</title>
-    <Link rel="stylesheet" href="index.css">
-    <link rel="icon" href="favicon.ico" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #1e40af;
+            --bg-color: #ffffff;
+            --text-color: #1f2937;
+            --text-secondary: #6b7280;
+            --card-bg: #f9fafb;
+            --border-color: #e5e7eb;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            min-height: auto;
+        }
+
+        .text-section {
+            width: 100%;
+            text-align: center;
+            order: 1;
+        }
+
+        .animation-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            order: 2;
+        }
+
+        header {
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            min-height: auto;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--gradient);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        section {
+            padding: 2.5rem 0;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--card-bg);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 0.8rem auto;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .about-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: var(--gradient);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        .tech-tag {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .contact-content {
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .cp-btn {
+            width: 100%;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            border: 1px solid transparent;
+            background-color: #f0f0f0;
+            padding: 4px;
+            font-weight: bold;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            cursor: pointer;
+        }
+
+        .copy-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #323232;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .copy-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        footer {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) {
+            .container {
+                max-width: 540px;
+            }
+            
+            .btn {
+                max-width: 220px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+            
+            .header-content {
+                flex-direction: row;
+                text-align: left;
+                min-height: 70vh;
+            }
+            
+            .text-section {
+                order: 1;
+                max-width: 50%;
+            }
+            
+            .animation-section {
+                order: 2;
+                max-width: 50%;
+            }
+            
+            .cta-buttons {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+            
+            .btn {
+                max-width: none;
+                width: auto;
+            }
+            
+            .skill-category h3,
+            .project-card h3,
+            .project-description {
+                text-align: left;
+            }
+            
+            .skill-tags {
+                justify-content: flex-start;
+            }
+            
+            .tech-stack {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
-<header>
-  <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
-  <div class="container">
-    <div class="header-content">
-      <div class="text-section">
-        <h1>Hussein Ghadban</h1>
-        <p class="subtitle">Full Stack Developer</p>
-        <div class="cta-buttons">
-          <a href="#about" class="btn">About Me</a>
-          <a href="#projects" class="btn">View Projects</a>
-          <a href="#contact" class="btn">Get In Touch</a>
+    <header>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        <div class="container">
+            <div class="header-content">
+                <div class="text-section">
+                    <h1>Hussein Ghadban</h1>
+                    <p class="subtitle">Full Stack Developer</p>
+                    <div class="cta-buttons">
+                        <a href="#about" class="btn">About Me</a>
+                        <a href="#projects" class="btn">View Projects</a>
+                        <a href="#contact" class="btn">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="animation-section">
+                    <div id="lottie-animation" style="width: 250px; height: 250px;"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="animation-section">
-        <div id="lottie-animation" style="width: 300px; height: 300px;"></div>
-      </div>
-    </div>
-  </div>
-</header>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
-<script>
-  lottie.loadAnimation({
-    container: document.getElementById('lottie-animation'),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: 'Animation.json'
-  });
-
-  function toggleTheme() {
-    document.body.classList.toggle('dark-mode');
-
-  }
-</script>
+    </header>
 
     <!-- About Me -->
     <section id="about">
@@ -216,37 +627,36 @@
             <div class="contact-content fade-in">
                 <p>Let's connect and discuss how we can work together on your next project!</p>
                 <div class="contact-links">
-    <div>
-    <a href="mailto:houssenghadban@gmail.com" class="contact-link">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" 
-       alt="Gmail" 
-       width="20" 
-       style="vertical-align: middle; margin-right: 8px;">
-        <span>houssenghadban@gmail.com</span>
-    </a>
-    <button onclick="copyToClipboard('houssenghadban@gmail.com')" class="cp-btn">📋</button>
-</div>
-<div>                    
-    <a href="tel:+96176639205" class="contact-link">
-        <span>📱</span>
-        <span>+961 76 639205</span>
-    </a>
-    <button onclick="copyToClipboard('+96176639205')" class="cp-btn">📋</button>
-    </div>
-        <a href="https://github.com/Hussen-ghadban" target="_blank" class="contact-link">
-            <span>🔗</span>
-            <span>GitHub</span>
-        </a>
-        <a href="https://linkedin.com/in/hussein-ghadban" target="_blank" class="contact-link">
-            <span>💼</span>
-            <span>LinkedIn</span>
-        </a>
+                    <div>
+                        <a href="mailto:houssenghadban@gmail.com" class="contact-link">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" 
+                            alt="Gmail" 
+                            width="20" 
+                            style="vertical-align: middle; margin-right: 8px;">
+                            <span>houssenghadban@gmail.com</span>
+                        </a>
+                        <button onclick="copyToClipboard('houssenghadban@gmail.com')" class="cp-btn">📋</button>
+                    </div>
+                    <div>                    
+                        <a href="tel:+96176639205" class="contact-link">
+                            <span>📱</span>
+                            <span>+961 76 639205</span>
+                        </a>
+                        <button onclick="copyToClipboard('+96176639205')" class="cp-btn">📋</button>
+                    </div>
+                    <a href="https://github.com/Hussen-ghadban" target="_blank" class="contact-link">
+                        <span>🔗</span>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/hussein-ghadban" target="_blank" class="contact-link">
+                        <span>💼</span>
+                        <span>LinkedIn</span>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
     <div id="copy-toast" class="copy-toast">Copied to clipboard!</div>
-
 
     <!-- Footer -->
     <footer>
@@ -255,8 +665,9 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
     <script>
-        // Theme toggle functionality (using in-memory storage)
+        // Theme toggle functionality
         let currentTheme = 'light';
         
         function toggleTheme() {
@@ -289,18 +700,17 @@
         }
 
         function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => {
-    const toast = document.getElementById('copy-toast');
-    toast.classList.add('show');
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('copy-toast');
+                toast.classList.add('show');
 
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2000); // Hide after 2 seconds
-  }).catch(err => {
-    console.error("Failed to copy: ", err);
-  });
-}
-
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy: ", err);
+            });
+        }
 
         // Smooth scrolling for navigation links
         function smoothScroll() {
@@ -327,6 +737,17 @@
         document.addEventListener('DOMContentLoaded', function() {
             smoothScroll();
             fadeInOnScroll();
+            
+            // Load Lottie animation
+            if (typeof lottie !== 'undefined') {
+                lottie.loadAnimation({
+                    container: document.getElementById('lottie-animation'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'Animation.json'
+                });
+            }
         });
 
         // Listen for scroll events
