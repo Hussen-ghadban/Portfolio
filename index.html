@@ -252,88 +252,100 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.0/lottie.min.js"></script>
     <script>
-        let currentTheme = 'light';
-        
-        function toggleTheme() {
-            const body = document.body;
-            const themeToggle = document.querySelector('.theme-toggle');
-            
-            if (currentTheme === 'light') {
-                body.setAttribute('data-theme', 'dark');
-                themeToggle.textContent = '☀️';
-                currentTheme = 'dark';
-            } else {
-                body.removeAttribute('data-theme');
-                themeToggle.textContent = '🌙';
-                currentTheme = 'light';
-            }
-        }
-        function fadeInOnScroll() {
-            const elements = document.querySelectorAll('.fade-in');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < window.innerHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
+    let currentTheme = localStorage.getItem('theme') || 'light';
+
+    function applyTheme(theme) {
+        const body = document.body;
+        const themeToggle = document.querySelector('.theme-toggle');
+
+        if (theme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeToggle.textContent = '☀️';
+        } else {
+            body.removeAttribute('data-theme');
+            themeToggle.textContent = '🌙';
         }
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('copy-toast');
-                toast.classList.add('show');
+        currentTheme = theme;
+        localStorage.setItem('theme', theme);
+    }
 
-                setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2000);
-            }).catch(err => {
-                console.error("Failed to copy: ", err);
-            });
-        }
+    function toggleTheme() {
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        applyTheme(newTheme);
+    }
 
-        function smoothScroll() {
-            const links = document.querySelectorAll('a[href^="#"]');
-            
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        targetSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
+    function fadeInOnScroll() {
+        const elements = document.querySelectorAll('.fade-in');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            smoothScroll();
-            fadeInOnScroll();
-            
-            if (typeof lottie !== 'undefined') {
-                lottie.loadAnimation({
-                    container: document.getElementById('lottie-animation'),
-                    renderer: 'svg',
-                    loop: true,
-                    autoplay: true,
-                    path: 'Animation.json'
-                });
+        elements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            const elementVisible = 150;
+
+            if (elementTop < window.innerHeight - elementVisible) {
+                element.classList.add('visible');
             }
         });
+    }
 
-        window.addEventListener('scroll', fadeInOnScroll);
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById('copy-toast');
+            toast.classList.add('show');
 
-        setTimeout(() => {
-            fadeInOnScroll();
-        }, 100);
-    </script>
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }).catch(err => {
+            console.error("Failed to copy: ", err);
+        });
+    }
+
+    function smoothScroll() {
+        const links = document.querySelectorAll('a[href^="#"]');
+
+        links.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        smoothScroll();
+        fadeInOnScroll();
+
+        // 🔥 Apply saved theme on load
+        applyTheme(currentTheme);
+
+        if (typeof lottie !== 'undefined') {
+            lottie.loadAnimation({
+                container: document.getElementById('lottie-animation'),
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'Animation.json'
+            });
+        }
+    });
+
+    window.addEventListener('scroll', fadeInOnScroll);
+
+    setTimeout(() => {
+        fadeInOnScroll();
+    }, 100);
+</script>
+
+
 </body>
 </html>
